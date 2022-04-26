@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ImageProcessing</title>
+    <h1>Tuning</h1>
+    <script>
+        function fetch1() {
+            var get1 = document.getElementById("get1").value;
+            document.getElementById("put1").value = get1;
+        }
+
+        function fetch2() {
+            var get2 = document.getElementById("get2").value;
+            document.getElementById("put2").value = get2;
+        }
+
+        function fetch3() {
+            var get3 = document.getElementById("get3").value;
+            document.getElementById("put3").value = get3;
+        }
+
+        function fetch4() {
+            var get4 = document.getElementById("get4").value;
+            document.getElementById("put4").value = get4;
+        }
+
+        function fetch5() {
+            var get5 = document.getElementById("get5").value;
+            document.getElementById("put5").value = get5;
+        }
+
+        function fetch6() {
+            var get6 = document.getElementById("get6").value;
+            document.getElementById("put6").value = get6;
+        }
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+    <form action="." method="POST">
+        <label>biFilter d:</label>
+        <input type="range" min="0" max="200" id="get1" step="1" onchange="fetch1()" /><br>
+        <input type="text" id="put1" />
+    </form>
+    <form action="." method="POST">
+        <label>biFilter SigmaColor/SigmaSpace:</label>
+        <input type="range" min="0" max="15" id="get2" step="1" onchange="fetch2()" /><br>
+        <input type="text" id="put2" />
+    </form>
+    <form action="." method="POST">
+        <label>Threshold:</label>
+        <input type="range" min="0" max="255" id="get3" step="1" onchange="fetch3()" /><br>
+        <input type="text" id="put3" />
+    </form>
+    <form action="." method="POST">
+        <label>Canny Th1:</label>
+        <input type="range" min="0" max="400" id="get4" step="1" onchange="fetch4()" /><br>
+        <input type="text" id="put4" />
+    </form>
+    <form action="." method="POST">
+        <label>Canny Th2:</label>
+        <input type="range" min="0" max="400" id="get5" step="1" onchange="fetch5()" /><br>
+        <input type="text" id="put5" />
+    </form>
+    <form action="." method="POST">
+        <label>Dilation:</label>
+        <input type="range" min="3" max="21" id="get6" step="2" onchange="fetch6()" /><br>
+        <input type="text" id="put6" />
+    </form>
+    <!--h2>BACKGROUNG SUBTRACTED FEED </h2>
+    <div>
+        <img src="{{ url_for('video') }}" width="40%" />
+    </div> -->
+    <script>
+        $(function () {
+            $('#get1').on('change', function () {
+                $.ajax({
+                    url: "{{ url_for('my_func') }}",
+                    data: {
+                        biFilterD: $('#get1').val(),
+                    },
+                    type: 'POST',
+                });
+            });
+            $('#get2').on('change', function () {
+                $.ajax({
+                    url: "{{ url_for('my_func') }}",
+                    data: {
+                        biFilterSigma: $('#get2').val(),
+                    },
+                    type: 'POST',
+                });
+            });
+            $('#get3').on('change', function () {
+                $.ajax({
+                    url: "{{ url_for('my_func') }}",
+                    data: {
+                        threshold: $('#get3').val(),
+                    },
+                    type: 'POST',
+                });
+            });
+            $('#get4').on('change', function () {
+                $.ajax({
+                    url: "{{ url_for('my_func') }}",
+                    data: {
+                        cannyThreshold1: $('#get4').val(),
+                    },
+                    type: 'POST',
+                });
+            });
+            $('#get5').on('change', function () {
+                $.ajax({
+                    url: "{{ url_for('my_func') }}",
+                    data: {
+                        cannyThreshold2: $('#get5').val(),
+                    },
+                    type: 'POST',
+                });
+            });
+            $('#get6').on('change', function () {
+                $.ajax({
+                    url: "{{ url_for('my_func') }}",
+                    data: {
+                        dilate: $('#get6').val(),
+                    },
+                    type: 'POST',
+                });
+            });
+        });
+
+    </script>
+    <h2>THRESHOLDED FEED </h2>
+<div>
+        <img src="{{ url_for('video1') }}" width="40%" />
+    </div>
+</body>
+
+</html>
